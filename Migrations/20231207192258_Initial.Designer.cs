@@ -9,8 +9,8 @@ using WebApiTienda.Models;
 namespace WebApiTienda.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20231130172645_inicio")]
-    partial class inicio
+    [Migration("20231207192258_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,6 +29,9 @@ namespace WebApiTienda.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("idEditorial")
+                        .HasColumnType("int");
+
+                    b.Property<int>("idGalery")
                         .HasColumnType("int");
 
                     b.Property<int>("idMangaInfo")
@@ -54,6 +57,9 @@ namespace WebApiTienda.Migrations
 
                     b.HasIndex("idEditorial");
 
+                    b.HasIndex("idGalery")
+                        .IsUnique();
+
                     b.HasIndex("idMangaInfo");
 
                     b.ToTable("descriptionMangas");
@@ -75,6 +81,25 @@ namespace WebApiTienda.Migrations
                     b.ToTable("editoriales");
                 });
 
+            modelBuilder.Entity("WebApiTienda.Models.galeria", b =>
+                {
+                    b.Property<int>("idGalery")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("idGalery");
+
+                    b.ToTable("galeria");
+                });
+
             modelBuilder.Entity("WebApiTienda.Models.mangaInfo", b =>
                 {
                     b.Property<int>("idMangaInfo")
@@ -92,10 +117,15 @@ namespace WebApiTienda.Migrations
                     b.Property<string>("demografia")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("idEditorial")
+                        .HasColumnType("int");
+
                     b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("idMangaInfo");
+
+                    b.HasIndex("idEditorial");
 
                     b.ToTable("mangaInfo");
                 });
@@ -108,9 +138,24 @@ namespace WebApiTienda.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("WebApiTienda.Models.galeria", "galeria")
+                        .WithOne("manga")
+                        .HasForeignKey("WebApiTienda.Models.descriptionManga", "idGalery")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("WebApiTienda.Models.mangaInfo", "mangaInfo")
-                        .WithMany()
+                        .WithMany("mangas")
                         .HasForeignKey("idMangaInfo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApiTienda.Models.mangaInfo", b =>
+                {
+                    b.HasOne("WebApiTienda.Models.editorial", "editorial")
+                        .WithMany("infoManga")
+                        .HasForeignKey("idEditorial")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

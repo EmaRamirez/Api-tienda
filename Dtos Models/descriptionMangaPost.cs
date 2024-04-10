@@ -22,5 +22,7 @@
 
 		public int idMangaInfo { get; set; }
 
+		public int idImage { get; set; }
+
 	}
 }

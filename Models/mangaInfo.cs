@@ -31,12 +31,13 @@ namespace WebApiTienda.Models
 
 		public int cantidadTomo { get; set; }
 
-		public List <descriptionManga> mangas { get; set; }
-
 		[ForeignKey("editorial")]
 		public int idEditorial { get; set; }
 
-		public editorial editorial {get; set;}
+		[NotMapped]
+		public editorial editorial { get; set;}
+		[NotMapped]
+		public List<descriptionManga>mangas { get; set; }
 	
 	}
 }

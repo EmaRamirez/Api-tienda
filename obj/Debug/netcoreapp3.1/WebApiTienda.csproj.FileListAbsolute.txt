@@ -58,7 +58,6 @@ D:\emanu\Manu\Portfolio\Api Tienda\WebApiTienda\obj\Debug\netcoreapp3.1\staticwe
 D:\emanu\Manu\Portfolio\Api Tienda\WebApiTienda\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildMultiTargeting.WebApiTienda.props
 D:\emanu\Manu\Portfolio\Api Tienda\WebApiTienda\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildTransitive.WebApiTienda.props
 D:\emanu\Manu\Portfolio\Api Tienda\WebApiTienda\obj\Debug\netcoreapp3.1\WebApiTienda.RazorTargetAssemblyInfo.cache
-D:\emanu\Manu\Portfolio\Api Tienda\WebApiTienda\obj\Debug\netcoreapp3.1\WebApiTienda.csproj.CopyComplete
 D:\emanu\Manu\Portfolio\Api Tienda\WebApiTienda\obj\Debug\netcoreapp3.1\WebApiTienda.dll
 D:\emanu\Manu\Portfolio\Api Tienda\WebApiTienda\obj\Debug\netcoreapp3.1\WebApiTienda.pdb
 D:\emanu\Manu\Portfolio\Api Tienda\WebApiTienda\bin\Debug\netcoreapp3.1\WebApiTienda.deps.json
@@ -68,3 +67,5 @@ D:\emanu\Manu\Portfolio\Api Tienda\WebApiTienda\bin\Debug\netcoreapp3.1\WebApiTi
 D:\emanu\Manu\Portfolio\Api Tienda\WebApiTienda\obj\Debug\netcoreapp3.1\WebApiTienda.genruntimeconfig.cache
 D:\emanu\Manu\Portfolio\Api Tienda\WebApiTienda\bin\Debug\netcoreapp3.1\Castle.Core.dll
 D:\emanu\Manu\Portfolio\Api Tienda\WebApiTienda\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Proxies.dll
+D:\emanu\Manu\Portfolio\Api Tienda\WebApiTienda\obj\Debug\netcoreapp3.1\WebApiTienda.sourcelink.json
+D:\emanu\Manu\Portfolio\Api Tienda\WebApiTienda\obj\Debug\netcoreapp3.1\WebApiTi.6373855C.Up2Date

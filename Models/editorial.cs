@@ -18,10 +18,10 @@ namespace WebApiTienda.Models
 		[Column("id")]
 		public int idEditorial { get; set; }
         public string name { get; set; }
-		
-		public List<descriptionManga> mangas { get; set; }
-
+		[NotMapped]
 		public List<mangaInfo>infoManga { get; set; }
+		[NotMapped]
+		public List <descriptionManga> mangas { get; set; }
     }
 
 

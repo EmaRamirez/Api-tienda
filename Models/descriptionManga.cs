@@ -12,7 +12,7 @@ namespace WebApiTienda.Models
 
 		}
 
-		public descriptionManga(string name, int tomoNro,double price,string summary, int numberPages,int idEditorial, editorial edit,int infoManga,mangaInfo info)
+		public descriptionManga(string name, int tomoNro,double price,string summary, int numberPages,int idEditorial, int infoManga,int idImage)
 		{
 			this.name = name;
 			this.tomoNro = tomoNro;
@@ -20,9 +20,11 @@ namespace WebApiTienda.Models
 			this.summary = summary;
 			this.numberPages = numberPages;
 			this.idEditorial = idEditorial;
-			this.editorial = edit;
+			
 			this.idMangaInfo = infoManga;
-			this.mangaInfo = info;
+			
+			this.idGalery = idImage;
+			
 		}
 
 		[Key]
@@ -43,16 +45,20 @@ namespace WebApiTienda.Models
 		[Required]
 		public int idEditorial { get;set; }
 
-		public editorial editorial { get; set; }
+		//public editorial editorial { get; set; }
 
 		[ForeignKey("mangaInfo")]
 		[Required]
 		public int idMangaInfo { get; set; }
 
 		
-		public mangaInfo mangaInfo { get; set; }
+		//public mangaInfo mangaInfo { get; set; }
+		
+		[ForeignKey("galeria")]
+		[Required]
+		public int idGalery { get; set; }
 
-
+		//public galeria galeria { get; set; }
 
 
 	}

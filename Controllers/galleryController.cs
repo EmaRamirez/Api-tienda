@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApiTienda.Dtos_Models;
 using WebApiTienda.Models;
 
 namespace WebApiTienda.Controllers
@@ -22,11 +24,11 @@ namespace WebApiTienda.Controllers
 
 		[HttpGet]
 
-		public ActionResult<galeria> Get()
+		public ActionResult<galeriaDto> Get()
 		{
 			try
 			{
-				return Ok(_context.galeria.ToList());
+				return Ok(viewAll());
 			}catch(Exception ex)
 			{
 				return BadRequest(ex.Message);
@@ -34,43 +36,54 @@ namespace WebApiTienda.Controllers
 		}
 
 		[HttpPost]
-
-		public ActionResult PostImages([FromForm]List<IFormFile>files)
+		public ActionResult AddPost([FromForm] galeria imagen)
 		{
-			List<galeria> images = new List<galeria>();
 
-			if (files.Count>0)
-			{
-				foreach (var file in files)
-				{
-					var filePath = "D:\\emanu\\Manu\\Portfolio\\Api Tienda\\WebApiTienda\\Imagenes\\"+file.FileName;
-					using (var stream = System.IO.File.Create(filePath))//creamos y guardamos en la carpeta
-					{
-						file.CopyToAsync(stream);
-					}
-					double tamanio = file.Length;
-					tamanio = Math.Round((tamanio / 1000000), 2);
-					galeria galeria = new galeria();
-					galeria.extension = Path.GetExtension(file.FileName).Substring(1);
-					galeria.name = Path.GetFileNameWithoutExtension(file.FileName);
-					galeria.size = tamanio;
-					galeria.url = filePath;
+			var extension = Path.GetExtension(imagen.imagen.FileName);
+			MemoryStream ms = new MemoryStream();
 
-					images.Add(galeria);
+			imagen.imagen.CopyToAsync(ms);
 
-				}
+			byte[] data = ms.ToArray();
 
-				_context.galeria.AddRange(images);
-				_context.SaveChanges();
+			string name = Path.GetFileNameWithoutExtension(imagen.imagen.FileName);
 
-				return Ok(images);
-			}
-
-			return BadRequest();
+			var agregar = new galeria(name, data, extension);
 
 
+			_context.galeria.Add(agregar);
+			_context.SaveChanges();
+			return Ok();
 		}
 
 
+		/*private  galeriaDto viewGallery(galeria value)
+		{
+			var galeria = new galeriaDto(value.url);
+			return galeria;*/
+
+
+
+		private List<galeriaDto> viewAll()
+		{
+			var images = new List<galeriaDto>() { };
+			var datos = _context.galeria.ToList();
+
+			foreach (var item in datos)
+			{
+				images.Add(new galeriaDto(item.name, item.archivo, item.extension));
+			}
+			return images.ToList();
+		}
+
 	}
 }
+		
+
+
+	
+
+
+
+
+ 
